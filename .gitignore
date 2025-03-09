@@ -1,0 +1,40 @@
+# Python-related ignores
+__pycache__/
+*.py[cod]
+*.swp
+.DS_Store
+
+# Virtual environment (if not using uv)
+.venv/
+env/
+venv/
+
+# Manim output files
+# media/
+output/
+# videos/
+images/
+# *.mp4
+*.png
+*.gif
+*.svg
+*.log
+*.json
+
+# Temporary & Debug Files
+*.tmp
+*.bak
+*.log
+*.aux
+*.out
+*.pdf
+*.dvi
+*.synctex.gz
+
+# Jupyter Notebook Checkpoints (if using Jupyter for Manim)
+.ipynb_checkpoints/
+
+# Editor & OS-Specific Files
+.vscode/
+.idea/
+# Thumbs.db
