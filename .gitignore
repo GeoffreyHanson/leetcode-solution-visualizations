@@ -10,11 +10,11 @@ env/
 venv/
 
 # Manim output files
-# media/
+media/
 output/
-# videos/
+videos/
 images/
-# *.mp4
+*.mp4
 *.png
 *.gif
 *.svg
