@@ -1,9 +1,14 @@
 from manim import *
 
+
 class MinConsecutiveCards(Scene):
     def construct(self):
         # Title
-        title = Text("Minimum Consecutive Cards to Pick Up for a Matching Pair").scale(0.65).to_edge(UP)
+        title = (
+            Text("Minimum Consecutive Cards to Pick Up for a Matching Pair")
+            .scale(0.65)
+            .to_edge(UP)
+        )
         self.play(Write(title))
 
         # Example input
@@ -11,11 +16,15 @@ class MinConsecutiveCards(Scene):
 
         # 1) Display the input array (row of squares labeled with values)
         array_group = self.create_card_array(cards)
-        array_group.shift(UP*1)  # move it higher if needed
+        array_group.shift(UP * 1)  # move it higher if needed
         self.play(FadeIn(array_group))
 
         # Prepare a dictionary heading: "Last Seen Dict (card -> last index)"
-        dict_header = Text("Last Seen Dict (card: last index)", font_size=28).to_edge(LEFT).shift(DOWN*1.5)
+        dict_header = (
+            Text("Last Seen Dict (card: last index)", font_size=28)
+            .to_edge(LEFT)
+            .shift(DOWN * 1.5)
+        )
         self.play(Write(dict_header))
 
         # We'll keep these:
@@ -23,14 +32,16 @@ class MinConsecutiveCards(Scene):
         #   dict_entries: A map from card -> the Manim Text() line we show on screen
         seen_data = {}
         dict_entries = {}
-        dict_y_offset = dict_header.get_center()[1] - 0.7  # place dictionary lines below header
+        dict_y_offset = (
+            dict_header.get_center()[1] - 0.7
+        )  # place dictionary lines below header
 
         # For highlighting the current card
         highlight_rect = None
 
         # Keep track of min_draws and a text object to show it
         min_draws = float("inf")
-        min_draws_title = Text("min_draws:", font_size=28).to_edge(RIGHT).shift(UP*1)
+        min_draws_title = Text("min_draws:", font_size=28).to_edge(RIGHT).shift(UP * 1)
         self.play(Write(min_draws_title))
         min_draws_text = Text("∞", font_size=28)
         min_draws_text.next_to(min_draws_title, DOWN, buff=0.2)
@@ -44,8 +55,12 @@ class MinConsecutiveCards(Scene):
             # Highlight the current square
             if highlight_rect:
                 self.play(FadeOut(highlight_rect))
-            current_card_mobj = array_group[2*i]  # squares at even indices in the group
-            highlight_rect = SurroundingRectangle(current_card_mobj, color=BLUE, buff=0.05)
+            current_card_mobj = array_group[
+                2 * i
+            ]  # squares at even indices in the group
+            highlight_rect = SurroundingRectangle(
+                current_card_mobj, color=BLUE, buff=0.05
+            )
             self.play(Create(highlight_rect))
 
             # If we've seen this card before, compute distance
@@ -59,10 +74,12 @@ class MinConsecutiveCards(Scene):
                     self.play(FadeOut(current_subarray_highlight))
 
                 # Highlight the subarray from prev_index to i
-                subarray_mobjects = VGroup(*[
-                    array_group[2*j] for j in range(prev_index, i+1)
-                ])
-                current_subarray_highlight = SurroundingRectangle(subarray_mobjects, color=YELLOW, buff=0.07)
+                subarray_mobjects = VGroup(
+                    *[array_group[2 * j] for j in range(prev_index, i + 1)]
+                )
+                current_subarray_highlight = SurroundingRectangle(
+                    subarray_mobjects, color=YELLOW, buff=0.07
+                )
                 self.play(Create(current_subarray_highlight))
 
                 # Update min_draws if needed
@@ -104,12 +121,13 @@ class MinConsecutiveCards(Scene):
         else:
             result_str = f"Minimum subarray length = {min_draws}"
 
-        result_text = Text(result_str, font_size=30, color=GREEN).next_to(array_group, DOWN, buff=1)
+        result_text = Text(result_str, font_size=30, color=GREEN).next_to(
+            array_group, DOWN, buff=1
+        )
         self.play(Write(result_text))
 
         # Pause before ending
         self.wait(2)
-
 
     def create_card_array(self, cards):
         """
@@ -126,3 +144,4 @@ class MinConsecutiveCards(Scene):
 
         group.move_to(ORIGIN)
         return group
+

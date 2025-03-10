@@ -1,5 +1,6 @@
-from types import List
 from collections import defaultdict
+from typing import List
+
 
 class Solution:
     def minimumCardPickup(self, cards: List[int]) -> int:
@@ -10,7 +11,7 @@ class Solution:
             if card in seen:
                 draws = i - seen[card] + 1
                 min_draws = min(min_draws, draws)
-            
+
             seen[card] = i
-        
+
         return min_draws if min_draws < float("inf") else -1
