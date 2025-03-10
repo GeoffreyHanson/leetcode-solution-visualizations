@@ -1,7 +1,7 @@
 from manim import *
 
 
-class MaxSumOfAPair(Scene):
+class MaxSumOfAPairWithEqualSumOfDigits(Scene):
     def construct(self):
         # Title
         title = (
