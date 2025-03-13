@@ -1,4 +1,23 @@
-from manim import *
+from manim import (
+    BLUE,
+    DOWN,
+    GREEN,
+    LEFT,
+    ORIGIN,
+    RIGHT,
+    UP,
+    YELLOW,
+    Create,
+    FadeIn,
+    FadeOut,
+    Scene,
+    Square,
+    SurroundingRectangle,
+    Text,
+    Transform,
+    VGroup,
+    Write,
+)
 
 
 class MinConsecutiveCards(Scene):
