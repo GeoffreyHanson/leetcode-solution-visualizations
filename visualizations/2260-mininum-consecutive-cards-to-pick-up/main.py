@@ -163,4 +163,3 @@ class MinConsecutiveCards(Scene):
 
         group.move_to(ORIGIN)
         return group
-
