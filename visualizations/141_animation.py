@@ -1,7 +1,3 @@
-############################################################################
-#      Tortoise‑and‑Hare cycle demo: 2 linear nodes, 5‑node cycle          #
-############################################################################
-
 import numpy as np
 from manim import *
 
@@ -27,14 +23,19 @@ class CycleDetection(Scene):
 
         ####################################################################
         # 2) Lay out graphics
-        #    – nodes 1‑2 in a line on the left
-        #    – nodes 3‑7 in a pentagon on the right
+        #    – nodes 1‑2 in a line on the left
+        #    – nodes 3‑7 in a pentagon on the right
         ####################################################################
         tail_positions = [(-6, 0, 0), (-4, 0, 0)]  # nodes 1,2
         R = 3
-        cycle_angles = np.linspace(PI / 2, PI / 2 - 2 * PI, 5, endpoint=False)
+        # Start angle rotated by 2*PI/5 (one fifth of a full circle) counterclockwise
+        cycle_angles = np.linspace(
+            PI / 2 + 2 * PI / 5, PI / 2 + 2 * PI / 5 - 2 * PI, 5, endpoint=False
+        )
+        # Added vertical offset of -1 to move pentagon down
+        y_offset = -0.9
         cycle_positions = [
-            (R * np.cos(a) + 1, R * np.sin(a), 0) for a in cycle_angles
+            (R * np.cos(a) + 1, R * np.sin(a) + y_offset, 0) for a in cycle_angles
         ]  # nodes 3‑7
         positions = tail_positions + cycle_positions
 
@@ -76,7 +77,7 @@ class CycleDetection(Scene):
         )
 
         # Title
-        title = Text("Cycle detection with tail", font_size=34).to_edge(UP)
+        title = Text("Linked List Cycle", font_size=34).to_edge(UP)
         self.play(Write(title))
         self.play(FadeIn(node_group), Create(arrows))
         self.wait(0.5)
@@ -119,6 +120,10 @@ class CycleDetection(Scene):
         ####################################################################
         # 5) Result
         ####################################################################
-        result = Text("Cycle Detected!", font_size=32, color=GREEN).to_edge(DOWN)
+        result = (
+            Text("Cycle Detected!", font_size=32, color=GREEN)
+            .to_edge(RIGHT)
+            .to_edge(DOWN)
+        )
         self.play(Write(result))
         self.wait(2)
